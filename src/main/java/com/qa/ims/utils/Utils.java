@@ -1,6 +1,6 @@
 package com.qa.ims.utils;
 
-import java.util.Scanner;
+import java.util.Scanner;   //takes user input and returns for use in main menu
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
