@@ -37,6 +37,10 @@ public class Utils {
 	public String getString() {
 		return scanner.nextLine();
 	}
+	
+	public Integer getInt() {
+		return scanner.nextInt();
+	}
 
 	public Double getDouble() {
 		String input = null;

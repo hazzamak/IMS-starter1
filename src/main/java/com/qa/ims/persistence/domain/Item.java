@@ -1,16 +1,17 @@
 package com.qa.ims.persistence.domain;
 
-public class Items {
+public class Item {
 	private Long id;
 	private String item_name;
 	private Integer item_price;
 	
-	public Items(String item_name, Integer item_price) {
-		this.setItem_name(item_name);
-		this.setItem_price(item_price);
+	public Item(String item_name, Integer item_price) {
+		this.item_name = item_name;
+		this.item_price = item_price;
 	}
 	
-	public Items(Long id, String item_name, Integer item_price) {
+	
+	public Item(Long id, String item_name, Integer item_price) {
 		this.setId(id);
 		this.setItem_name(item_name);
 		this.setItem_price(item_price);
@@ -60,7 +61,7 @@ public class Items {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Items other = (Items) obj;
+		Item other = (Item) obj;
 		if (getItem_name() == null) {
 			if (other.getItem_name() != null)
 				return false;
