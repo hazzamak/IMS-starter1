@@ -23,7 +23,8 @@ public class OrdersDAO implements Dao<Orders> {
 	public Orders readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders ORDER BY id DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM orders INNER JOIN orders_items ON"
+						+ " orders.id = order_items.order_id ORDER BY id DESC LIMIT 1");) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -53,7 +54,8 @@ public class OrdersDAO implements Dao<Orders> {
 	@Override
 	public Orders read(Long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders WHERE id = ?"); ) {
+				PreparedStatement statement = connection.prepareStatement("SELECT * FROM orders JOIN order_items ON "
+						+ "orders.id = order_items.order_id WHERE orders.id = ?"); ) {
 			statement.setLong(1, id);
 			try (ResultSet resultSet = statement.executeQuery();) {
 				resultSet.next();
@@ -84,10 +86,25 @@ public class OrdersDAO implements Dao<Orders> {
 	}
 
 	@Override
-	public int delete(long id) {
+	public int deleteOrder(long id) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
-				PreparedStatement statement = connection.prepareStatement("DELETE FROM orders WHERE id = ?");) {
+				PreparedStatement statement = connection.prepareStatement("DELETE FROM orders INNER JOIN orders_items ON"
+						+ " orders.id = order_items.order_id WHERE orders.id = ?");) {
 			statement.setLong(1, id);
+			return statement.executeUpdate();
+		} catch (Exception e) {
+			LOGGER.debug(e);
+			LOGGER.error(e.getMessage());
+		}
+		return 0;
+	}
+	
+	public int deleteItem(long id, long id2) {
+		try (Connection connection = DBUtils.getInstance().getConnection();
+				PreparedStatement statement = connection.prepareStatement("DELETE FROM orders INNER JOIN orders_items ON"
+						+ " orders.id = order_items.order_id WHERE order_items.item_id = ? AND order_items.order_id = ?");) {
+			statement.setLong(1, id);
+			statement.setLong(2, id2);
 			return statement.executeUpdate();
 		} catch (Exception e) {
 			LOGGER.debug(e);
@@ -107,6 +124,18 @@ public class OrdersDAO implements Dao<Orders> {
 	public Orders update(Orders t) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public Orders create(Orders t) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int delete(long id) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 	

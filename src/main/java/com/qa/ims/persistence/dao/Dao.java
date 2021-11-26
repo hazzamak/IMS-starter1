@@ -22,4 +22,6 @@ public interface Dao<T> {
 	T modelFromResultSet(ResultSet resultSet) throws SQLException;
 
 	Orders create(Orders orders, orderItems orders2);
+
+	int deleteOrder(long id);
 }
