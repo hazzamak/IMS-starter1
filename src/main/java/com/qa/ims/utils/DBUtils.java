@@ -69,7 +69,7 @@ public class DBUtils {
 		return modified;
 	}
 
-	public Connection getConnection() throws SQLException {
+	public Connection getConnection() throws SQLException {   // Where connects to database
 		return DriverManager.getConnection(dbUrl, dbUser, dbPassword);
 	}
 

@@ -1,0 +1,17 @@
+add item to order using order_item table - create function
+order_id foreign collum
+
+orderitem.dao.create - just method to insert rows into table
+how and where to give access?
+=
+one order controller that has access to two DAOs
+
+customer controller, input from user for customer, uses customerDAO
+item controller, input for items, uses itemDAO
+order controller, two DAOs, orderDAO + orderItemDAO, create read delete
+uses orderitemdao to create + delete, uses orderID 
+single order controller, both DAOs
+only uses orderitem to add and delete orders
+
+easiest is one ordercontroller two DAOs
+within ordercontroller is ALL function, view add delete etc

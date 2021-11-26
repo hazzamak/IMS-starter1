@@ -12,6 +12,8 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.qa.ims.persistence.domain.Customer;
+import com.qa.ims.persistence.domain.Orders;
+import com.qa.ims.persistence.domain.orderItems;
 import com.qa.ims.utils.DBUtils;
 
 public class CustomerDAO implements Dao<Customer> {
@@ -137,6 +139,18 @@ public class CustomerDAO implements Dao<Customer> {
 			LOGGER.debug(e);
 			LOGGER.error(e.getMessage());
 		}
+		return 0;
+	}
+
+	@Override
+	public Orders create(Orders orders, orderItems orders2) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int deleteOrder(long id) {
+		// TODO Auto-generated method stub
 		return 0;
 	}
 
